@@ -25,6 +25,21 @@ console.log(sum);
 getNotes();
 
 
+//Learning to take input from user using argvv
+// console.log(process.argv);
+const command = process.argv[2];
+
+if (command === 'add') {
+    console.log(chalk.bgGreen.bold('Adding notes....'));
+} else if (command === 'remove') {
+    console.log(chalk.bgRed.bold('Removing notes....'));
+}
+
+console.log(process.argv);
+
+
+
+
 
 
 
