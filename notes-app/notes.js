@@ -5,7 +5,7 @@ const getNotes = function () {
 }
 
 const addNotes = function (title, body) {
-    const notes = loadNotes()
+    const notes = loadNotes();
     const duplicateNotes = notes.filter(function (notes) {
         return notes.title === title
     })
@@ -43,7 +43,23 @@ const loadNotes = function () {
 
 }
 
+
+const removeNote = function (title) {
+    const notes = loadNotes();
+    const notesToKeep = notes.filter(function (notes) {
+        return notes.title !== title
+
+    })
+
+    if (notes.length > notesToKeep.length) {
+        console.log(chalk.bgRed('Notes Deleted....'));
+    } else {
+        console.log(chalk.bgBlue('No notes found...'));
+    }
+    saveNotes(notesToKeep);
+}
 module.exports = {
     getNotes: getNotes,
-    addNotes: addNotes
+    addNotes: addNotes,
+    removeNote: removeNote
 }
