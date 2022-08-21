@@ -1,5 +1,4 @@
 const fs = require('fs');
-const add = require('./utils.js');
 const chalk = require('chalk');
 const notes = require('./notes.js');
 const yargs = require('yargs');
