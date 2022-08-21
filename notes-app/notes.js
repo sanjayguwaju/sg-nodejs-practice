@@ -1,17 +1,27 @@
 const fs = require('fs');
+const chalk = require('chalk');
 const getNotes = function () {
     return 'Your notes...'
 }
 
 const addNotes = function (title, body) {
     const notes = loadNotes()
-
-    //Below in notes.push it take title & body from above function and push to the array.
-    notes.push({
-        title: title,
-        body: body
+    const duplicateNotes = notes.filter(function (notes) {
+        return notes.title === title
     })
-    saveNotes(notes)
+
+    if (duplicateNotes.length === 0) {
+        //Below in notes.push it take title & body from above function and push to the array.
+        notes.push({
+            title: title,
+            body: body
+        })
+        saveNotes(notes)
+        console.log(chalk.bgGreen('New notes is saved in notes.json'));
+    } else {
+        console.log(chalk.bgRed('Notes is already taken...'));
+    }
+
 
 }
 
