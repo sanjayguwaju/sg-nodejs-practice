@@ -1,1 +1,0 @@
-This is newly created notes.txt file. I am at begginers level of node.js

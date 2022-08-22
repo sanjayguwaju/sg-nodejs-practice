@@ -1,28 +1,74 @@
 const fs = require('fs');
-const add = require('./utils.js');
-
-// Start: Use of validator explained
-const validator = require('validator');
-
-console.log(validator.isEmail('sanjayguwaju@gmail.com'));
-
-//End: Use of the validator explained
-
 const chalk = require('chalk');
+const notes = require('./notes.js');
+const yargs = require('yargs');
+const { command, describe, demandOption } = require('yargs');
 
-console.log(chalk.blue.bgGreen.bold.inverse("Success !"));
-console.log(chalk.blue.bgGreen.bold.inverse("Success Again !!"));
-console.log(chalk.blue.bgGreen.bold.inverse("Success Again Once More !!!"));
+//Make a new command add
+yargs.command({
+    command: 'add',
+    describe: 'Adding a new note',
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        },
+        body: {
+            describe: 'Note body',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function (argv) {
+        notes.addNotes(argv.title, argv.body)
+    }
+})
 
-const getNotes = require('./notes.js');
+//Make a new command remove
+yargs.command({
+    command: 'remove',
+    describe: 'Removing a new note',
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function (argv) {
+        notes.removeNote(argv.title)
+    }
+})
 
-fs.writeFileSync('notes.txt', 'This is newly created notes.txt file.');
-fs.appendFileSync('notes.txt', ' I am at begginers level of node.js');
+//Make a new command add
+yargs.command({
+    command: 'read',
+    describe: 'Reads a note',
+    handler: function () {
+        console.log(chalk.bgGreen.bold('Reading note....'));
+    }
+})
 
-const sum = add(4, -2);
-console.log(sum);
+//Make a new command add
+yargs.command({
+    command: 'list',
+    describe: 'Lists a note',
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function (argv) {
+        console.log(chalk.bgGreen.bold('Listing note....'), argv);
+    }
+})
+// console.log(yargs.argv);
+yargs.parse();
 
-getNotes();
+
 
 
 
