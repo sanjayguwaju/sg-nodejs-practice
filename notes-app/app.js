@@ -3,6 +3,7 @@ const chalk = require('chalk');
 const notes = require('./notes.js');
 const yargs = require('yargs');
 const { command, describe, demandOption } = require('yargs');
+const { listNote } = require('./notes.js');
 
 //Make a new command add
 yargs.command({
@@ -54,15 +55,8 @@ yargs.command({
 yargs.command({
     command: 'list',
     describe: 'Lists a note',
-    builder: {
-        title: {
-            describe: 'Note title',
-            demandOption: true,
-            type: 'string'
-        }
-    },
-    handler(argv) {
-        console.log(chalk.bgGreen.bold('Listing note....'), argv);
+    handler() {
+        notes.listNotes()
     }
 })
 // console.log(yargs.argv);
