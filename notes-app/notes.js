@@ -1,14 +1,17 @@
 const fs = require('fs');
 const chalk = require('chalk');
-const getNotes = function () {
-    return 'Your notes...'
-}
 
-const addNotes = function (title, body) {
+// Above all the modules above
+
+const getNotes = () => 'Your notes...'
+
+const addNotes = (title, body) => {
     const notes = loadNotes();
-    const duplicateNotes = notes.filter(function (notes) {
-        return notes.title === title
-    })
+    const duplicateNotes = notes.filter((note) => note.title === title)
+
+    // const duplicateNotes = notes.filter(function (note) {
+    //     return notes.title === title
+    // })
 
     if (duplicateNotes.length === 0) {
         //Below in notes.push it take title & body from above function and push to the array.
@@ -21,16 +24,38 @@ const addNotes = function (title, body) {
     } else {
         console.log(chalk.bgRed('Notes is already taken...'));
     }
+}
 
+const removeNote = (title) => {
+    const notes = loadNotes();
+    const notesToKeep = notes.filter((note) => note.title !== title)
+
+    if (notes.length > notesToKeep.length) {
+        console.log(chalk.bgRed('Notes Deleted....'));
+        saveNotes(notesToKeep);
+    } else {
+        console.log(chalk.bgBlue('No notes found...'));
+    }
 
 }
 
-const saveNotes = function (notes) {
+const listNotes = () => {
+    const notes = loadNotes();
+    console.log(chalk.inverse('Your all of the notes are here....'));
+
+    notes.forEach((notes) => {
+        console.log(notes.title);
+    })
+}
+
+// Global functions for all of the above codes
+
+const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes);
     fs.writeFileSync('notes.json', dataJSON);
 }
 
-const loadNotes = function () {
+const loadNotes = () => {
     try {
         const dataBuffer = fs.readFileSync('notes.json');
         const dataJSON = dataBuffer.toString();
@@ -43,23 +68,9 @@ const loadNotes = function () {
 
 }
 
-
-const removeNote = function (title) {
-    const notes = loadNotes();
-    const notesToKeep = notes.filter(function (notes) {
-        return notes.title !== title
-
-    })
-
-    if (notes.length > notesToKeep.length) {
-        console.log(chalk.bgRed('Notes Deleted....'));
-    } else {
-        console.log(chalk.bgBlue('No notes found...'));
-    }
-    saveNotes(notesToKeep);
-}
 module.exports = {
     getNotes: getNotes,
     addNotes: addNotes,
-    removeNote: removeNote
+    removeNote: removeNote,
+    listNotes: listNotes
 }
