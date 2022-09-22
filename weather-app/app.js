@@ -38,10 +38,16 @@ request({ url: geocodeURL, json: true }, (error, response) => {
 
 */
 
-const request = require('request');
 const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
-geocode('Boston', (error, data) => {
+geocode('Kathmandu', (error, data) => {
     console.log('Error: ', error);
     console.log('Data: ', data);
 })
+
+forecast(85.36667, 27.71667, (error, data) => {
+    console.log('Error: ', error);
+    console.log('Data: ', data);
+})
+
