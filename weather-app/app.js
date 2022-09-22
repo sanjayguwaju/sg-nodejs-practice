@@ -38,16 +38,31 @@ request({ url: geocodeURL, json: true }, (error, response) => {
 
 */
 
+
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
 
-geocode('Kathmandu', (error, data) => {
-    console.log('Error: ', error);
-    console.log('Data: ', data);
-})
+const address = process.argv[2];
 
-forecast(85.36667, 27.71667, (error, data) => {
-    console.log('Error: ', error);
-    console.log('Data: ', data);
-})
+// To make an input after app.js ___input her ___ you need to use process.argv
+if (!address) {
+    console.log("Opss you forgot to provide address. Please enter address.")
+} else {
+    geocode(address, (error, data) => {
+
+        if (error) {
+            return console.log(error)
+        }
+        forecast(data.latitude, data.longitude, (error, forcastData) => {
+            if (error) {
+                return console.log(error)
+            }
+
+            console.log(data.location);
+            console.log(forcastData);
+        })
+    })
+}
+
+
 
