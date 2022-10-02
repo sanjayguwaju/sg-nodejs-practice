@@ -20,24 +20,24 @@ app.use(express.static(publicDirectoryPath))
 
 app.get('', (req, res) => {
     res.render('index', {
-        title: "This is homepage",
-        name: "Weather App"
+        title: "Weather App",
+        name: "Sanjay Guwaju"
 
     })
 })
 
 app.get('/about', (req, res) => {
     res.render('about', {
-        "title": "This is about page",
-        "name": "Weather App"
+        "title": "About Page",
+        "name": "Sanjay Guwaju"
     })
 })
 
 app.get('/help', (req, res) => {
     res.render('help', {
-        helpText: 'This is some helpful text.',
+        helpText: 'Help Page',
         helpMessage: 'Please avoid crowd due to the Pandemic',
-        name: "Weather App"
+        name: "Sanjay Guwaju"
     })
 })
 
@@ -59,6 +59,10 @@ app.get('/help', (req, res) => {
 
 app.get('/weather', (req, res) => {
     res.send("This is a weather page")
+})
+
+app.get('*', (req, res) => {
+    res.send("This is 404 page")
 })
 
 app.listen(3000, () => {
