@@ -41,6 +41,13 @@ app.get('/help', (req, res) => {
     })
 })
 
+app.get('/weather', (req, res) => {
+    res.send({
+        forecast: 'It is snowing',
+        location: 'Philadelphia'
+    })
+})
+
 
 // app.get('', (req, res) => {
 //     res.send("<h1>Hello Express</h1>")
