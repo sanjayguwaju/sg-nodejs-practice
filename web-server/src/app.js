@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
 const app = express();
 
@@ -41,6 +43,8 @@ app.get('/help', (req, res) => {
     })
 })
 
+// Important part where we wire up the geocode and forecast and show it up to screen through res. means respond. responds happens in the screen in the form of object.
+
 app.get('/weather', (req, res) => {
     if (!req.query.address) {
         return res.send({
@@ -48,12 +52,32 @@ app.get('/weather', (req, res) => {
         })
     }
 
-    res.send({
-        forecast: 'It is snowing',
-        location: 'Philadelphia',
-        address: req.query.address
+    geocode(req.query.address, (error, { latitude, longitude, location }) => {
+        if (error) {
+            return res.send({ error })
+        }
+
+        forecast(latitude, longitude, (error, forecastData) => {
+            if (error) {
+                return res.send({ error })
+            }
+
+            res.send({
+                forecast: forecastData,
+                location,
+                address: req.query.address
+            })
+        })
+
     })
 })
+// Done a error not looked at the code scope at where the forecastData belongs.
+// ################## Revise Destructuring ######################
+
+// Above we have created the /weather endpoint and using that endpoint and req. means request req.query.address we can grab the addrress from the address bar.
+
+// Important part where we wire up the geocode and forecast and show it up to screen through res. means respond. responds happens in the screen in the form of object.
+
 
 app.get('*', (req, res) => {
     res.send("This is 404 page")
