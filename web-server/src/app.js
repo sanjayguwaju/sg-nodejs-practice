@@ -42,30 +42,17 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
+    if (!req.query.address) {
+        return res.send({
+            error: 'You must provide an addresses'
+        })
+    }
+
     res.send({
         forecast: 'It is snowing',
-        location: 'Philadelphia'
+        location: 'Philadelphia',
+        address: req.query.address
     })
-})
-
-
-// app.get('', (req, res) => {
-//     res.send("<h1>Hello Express</h1>")
-// })
-
-// app.get('/help', (req, res) => {
-//     res.send("<h2>This is help page</h2>")
-// })
-
-// app.get('/about', (req, res) => {
-//     res.send({
-//         "name": "Sanjay Guwaju",
-//         "age": 24
-//     })
-// })
-
-app.get('/weather', (req, res) => {
-    res.send("This is a weather page")
 })
 
 app.get('*', (req, res) => {
