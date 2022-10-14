@@ -41,3 +41,29 @@ a {
 .potrait {
     width: 250px;
 }
+
+input {
+    border: 1px solid #cccccc;
+    padding: 8px;
+}
+
+button {
+    cursor: pointer;
+    border: 1px solid #888888;
+    background: #888888;
+    color: white;
+    padding: 8px;
+}
+
+#message-1 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#message-2 {
+    font-family: 'Poppins';
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+    color: chocolate;
+}
