@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-
-const User = mongoose.model('User', {
+const bcrypt = require('bcryptjs')
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -40,6 +40,8 @@ const User = mongoose.model('User', {
         }
     }
 })
+
+const User = mongoose.model('User', userSchema)
 
 // const me = new User({
 //     name: 'Manik',
