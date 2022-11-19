@@ -17,17 +17,17 @@ app.listen(port, () => {
 
 //This is place where i am working on now.
 
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')
 
-const myFunction = async () => {
-    const token = jwt.sign({ _id: '6370440ebeff4ea2ccdc3b24' }, 'thisismynewcourse', { expiresIn: '2 weeks' })
-    console.log(token)
+// const myFunction = async () => {
+//     const token = jwt.sign({ _id: '6370440ebeff4ea2ccdc3b24' }, 'thisismynewcourse', { expiresIn: '2 weeks' })
+//     console.log(token)
 
-    const data = jwt.verify(token, 'thisismynewcourse')
-    console.log(data)
-}
+//     const data = jwt.verify(token, 'thisismynewcourse')
+//     console.log(data)
+// }
 
-myFunction()
+// myFunction()
 
 // const bcrypt = require('bcryptjs')
 
