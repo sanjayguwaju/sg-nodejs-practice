@@ -35,7 +35,6 @@ router.get('/tasks/:id', auth, async (req, res) => {
     const _id = req.params.id
 
     try {
-        // const task = await Task.findById(_id)
         // Below line check that if the task id and owner matches or not if it doesn't then it is not going to show the task created to other users.
         const task = await Task.findOne({ _id, owner: req.user._id })
         if (!task) {
@@ -62,14 +61,9 @@ router.patch('/tasks/:id', auth, async (req, res) => {
         // const task = await Task.findById(req.params.id)
         const task = await Task.findOne({ _id: req.params.id, owner: req.user.id })
 
-
-        // const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
-
-
         if (!task) {
             return res.status(404).send()
         }
-
 
         updates.forEach((update) => task[update] = req.body[update])
         await task.save()

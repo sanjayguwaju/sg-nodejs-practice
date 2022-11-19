@@ -16,16 +16,4 @@ const Task = mongoose.model('Task', {
         ref: 'User'
     }
 })
-
-// const task = new Task({
-//     description: 'Learn the Mongoose Library',
-//     completed: false
-// })
-
-// task.save().then(() => {
-//     console.log(task)
-// }).catch((error) => {
-//     console.log(error)
-// })
-
 module.exports = Task
