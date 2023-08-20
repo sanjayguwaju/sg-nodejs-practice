@@ -15,3 +15,7 @@ Describe how to install and set up the project, including any dependencies that 
 
 ```bash
 npm install
+
+or 
+
+yarn install
